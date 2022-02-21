@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script defer>
+        MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script> -->
+    <script defer type="text/x-mathjax-config">
+        MathJax.Hub.Config({ jax: ['input/AsciiMath'], extensions: ['asciimath2jax.js'], asciimath2jax: { delimiters: [['\\$','\\$'], ['`','`']] } });
+    </script>
+    <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/latest.min.js?AM_CHTML" integrity="sha512-/kYnJy6+zL7+sfYX71amPypBreoBzZgp0ujTqNeFuDfLL81iqrpS8T72Q+eFL9cl47CeKW+SRabvI1XkHLtZdQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-svg-full.min.js" integrity="sha512-RvtSA5grZZKDz4mg1vcso9AZdczZg631CC1pbqp+GJC/3mqAcSSy1RJXnini9TOqXQQc7K0zaYWd4XdQLG92/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"
+        defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Math Translator</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">Math Translator For Melearna</div>
+        <div class="alert hide">
+            <span class="closebtn">&times;</span>
+        </div>
+        <div class="input-area">
+
+            <form id="form-input" action="./index.js" method="post">
+                <div class="form">
+                    <div class="form-div_left">
+                        <label for="textarea-input">Question</label>
+                        <textarea id="textarea-input" rows="10" cols="50" required placeholder="Enter math notations"></textarea>
+
+                    </div>
+                    <div class="form-div_right">
+                        <div class="options">
+                            <div class="sep-inputs">
+                                <label for="option-a">Option A.</label>
+                                <input id="option-a" type="text" required class="option">
+                                <label for="option-b">Option B</label>
+                                <input id="option-b" type="text" required class="option">
+                            </div>
+
+                            <div class="sep-inputs">
+                                <label for="option-c">Option C</label>
+                                <input id="option-c" type="text" required class="option">
+                                <label for="option-d">Option D</label>
+                                <input id="option-d" type="text" required class="option">
+
+                            </div>
+
+                        </div>
+                        <div class="answers ans-sep">
+                            <div class="sep-inputs ">
+                                <label for="answer">Correct Answer</label>
+                                <input id="answer" type="text" required class="option">
+                            </div>
+                            <div class="sep-inputs">
+                                <label for="further-explanation">Further Explanation</label>
+                                <textarea rows="5" cols="28" id="further-explanation" placeholder="No official explanation is available for this question at this time." class="option"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <input type="checkbox" checked id="display">
+                <div class="call-to-action">
+                    <button class="btn">Submit</button>
+                    <input class="btn" type="button" name="final preview" value="final preview" id="final-preview">
+                </div>
+            </form>
+
+        </div>
+        <div class="output-area">
+
+            <div class="display-field">
+                <p>Live Preview</p>
+            </div>
+            <div class="final-preview">
+                <p>Final preview</p>
+                <div class="q hidden out">
+                    <span></span>
+                    <p></p>
+                </div>
+                <div class="opt-a hidden out">
+                    <span></span>
+                    <p></p>
+                </div>
+                <div class="opt-b hidden out ">
+                    <span></span>
+                    <p></p>
+                </div>
+                <div class="opt-c hidden out">
+                    <span></span>
+                    <p></p>
+                </div>
+                <div class="opt-d hidden out ">
+                    <span></span>
+                    <p "></p>
+                </div>
+                <div class="ans hidden out ">
+                    <span></span>
+                    <p></p>
+                </div>
+                <div class="fe hidden out ">
+                    <span></span>
+                    <p></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript " src="./index.js "></script>
+</body>
+
+</html>
