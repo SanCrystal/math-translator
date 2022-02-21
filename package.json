@@ -1,0 +1,27 @@
+{
+    "name": "math-translator",
+    "version": "1.0.0",
+    "description": "Translate words to mathematical symbols and equations.",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SanCrystal/math-translator.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/SanCrystal/math-translator/issues"
+    },
+    "homepage": "https://github.com/SanCrystal/math-translator#readme",
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3"
+    }
+}
