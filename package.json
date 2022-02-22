@@ -4,7 +4,7 @@
     "description": "Translate words to mathematical symbols and equations.",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon app.js"
+        "start": "node app.js"
     },
     "repository": {
         "type": "git",
