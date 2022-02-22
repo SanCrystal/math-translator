@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 
 
 const questionDataSchema = mongoose.Schema({
+    Subject: { type: String, required: true, trim: true },
+    ExamYear: { type: String, required: true, trim: true },
+    ExamType: { type: String, required: true, trim: true },
     Question: { type: String, required: true, trim: true },
     OptionA: { type: String, required: true, trim: true },
     OptionB: { type: String, required: true, trim: true },
