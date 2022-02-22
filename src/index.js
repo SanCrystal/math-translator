@@ -1,6 +1,9 @@
 $(document).ready(function() {
     //question and answer bucket 
     let questionData = {}
+    const examYear = document.querySelector('#exam-year');
+    const examType = document.querySelector('#exam-type');
+    const subject = document.querySelector('#subject');
 
     const textArea = document.querySelector('#textarea-input');
     const optionA = document.querySelector('#option-a');
@@ -13,6 +16,8 @@ $(document).ready(function() {
     const finalPreviewBtn = document.querySelector("#final-preview");
     const finalPreviewOutput = document.querySelector(".final-preview");
     const displayF = document.querySelector('.display-field')
+
+    console.log(examType.value)
         //convert to math values
     const convertToMathValues = async(inputValue, output) => {
         const display = document.getElementById("display");
@@ -51,13 +56,15 @@ $(document).ready(function() {
         }
         //alert modal
     const closeBtn = document.querySelector(".closebtn");
+    const confirm = document.querySelector(".confirm");
     const container = document.querySelector('.container')
     container.addEventListener('click', e => {
-        if (e.target.className == closeBtn.className) {
+        if ((e.target.className == closeBtn.className) || (e.target.className == confirm.className)) {
             const parent = e.target.parentElement;
             const success = parent.classList.contains("success")
+            const submitted = parent.classList.contains("confirm")
                 // parent.style.opacity = "0";
-            if (success) {
+            if (success || submitted) {
                 textArea.value = "";
                 optionA.value = "";
                 optionB.value = "";
@@ -82,17 +89,27 @@ $(document).ready(function() {
     const processData = () => {
         //default for further explanation
         furtherExplanation.value = furtherExplanation.value != "" ? furtherExplanation.value : furtherExplanation.getAttribute('placeholder');
-        const questionDataInputs = [textArea, optionA, optionB, optionC, optionD, answer, furtherExplanation];
+        const questionDataInputs = [examYear, examType, subject, textArea, optionA, optionB, optionC, optionD, answer, furtherExplanation];
         //loop through the input blocks
         questionDataInputs.forEach(input => {
-            const getKey = input.previousElementSibling.innerHTML.trim().replace(" ", "")
-            const getValue = input.value;
+            const getKey = input.previousElementSibling ? input.previousElementSibling.innerHTML.trim().replace(" ", "") : input.parentElement.previousElementSibling.innerHTML.trim().replace(" ", "");
+            const getValue = input.value != "" && input.value != "---" ? input.value : null;
             //add to question data
-            questionData[getKey] = getValue;
+            if (getValue) {
+                questionData[getKey] = getValue;
+            } else {
+                //empty questionData bucket 
+                questionData = {};
+                reportStatus({ message: `Error! value of ${getKey} is required!`, status: 500 });
+                return
+            }
 
         });
     };
     const disableFields = () => {
+        examType.setAttribute('disabled', "");
+        examYear.setAttribute('disabled', "");
+        subject.setAttribute('disabled', "");
         textArea.setAttribute('disabled', "");
         optionA.setAttribute('disabled', "");
         optionB.setAttribute('disabled', "");
@@ -102,6 +119,9 @@ $(document).ready(function() {
         furtherExplanation.setAttribute('disabled', "");
     };
     const enableFields = () => {
+            document.querySelector('#exam-year').removeAttribute('disabled')
+            document.querySelector('#exam-type').removeAttribute('disabled')
+            document.querySelector('#subject').removeAttribute('disabled')
             document.querySelector('#textarea-input').removeAttribute('disabled')
             document.querySelector('#option-a').removeAttribute('disabled')
             document.querySelector('#option-b').removeAttribute('disabled')
@@ -115,7 +135,14 @@ $(document).ready(function() {
 
     //get final preview 
     const finalPreview = async inputObj => {
-        //get node of outputs for final previews
+        //get node of outputs for final previews ::note keys pairs are oupted in the span tag and values on the p tag denoted with s and p in the variable declarations
+
+        const eYear = document.querySelector('.eyear p');
+        const eYears = document.querySelector('.eyear span');
+        const eType = document.querySelector('.etype p');
+        const eTypes = document.querySelector('.etype span');
+        const eSub = document.querySelector('.esub p');
+        const eSubs = document.querySelector('.esub span');
         const q = document.querySelector('.q p');
         const qs = document.querySelector('.q span');
         const optA = document.querySelector('.opt-a p');
@@ -131,15 +158,15 @@ $(document).ready(function() {
         const fe = document.querySelector('.fe p');
         const feS = document.querySelector('.fe span');
         //output bucket
-        const outputsBucket = [q, optA, optB, optC, optD, ans, fe];
-        const outputsBucketKey = [qs, optAs, optBs, optCs, optDs, ansS, feS];
+        const outputsBucket = [eYear, eType, eSub, q, optA, optB, optC, optD, ans, fe];
+        const outputsBucketKey = [eYears, eTypes, eSubs, qs, optAs, optBs, optCs, optDs, ansS, feS];
 
         //call process data
         processData();
 
         //validates if there is no empty field
-        const fieldItems = [textArea.value, optionA.value, optionB.value, optionC.value, optionD.value, answer.value, furtherExplanation.value];
-        const filtered = fieldItems.filter(e => !(e.length == 0))
+        const fieldItems = [examYear.value, examType.value, subject.value, textArea.value, optionA.value, optionB.value, optionC.value, optionD.value, answer.value, furtherExplanation.value];
+        const filtered = fieldItems.filter(e => !(e.length == 0 || e == "---"))
         const validSubmission = fieldItems.length == filtered.length ? true : false;
 
         if (validSubmission) {
@@ -205,27 +232,30 @@ $(document).ready(function() {
     });
 
     //add event listener on submit 
-    formInput.addEventListener("submit", async e => {
+    formInput.addEventListener("submit", e => {
         e.preventDefault();
         //call processData
         processData();
-        const request = await $.ajax({
-            url: "/questions",
-            type: "POST",
-            contentType: "application/json",
-            dataType: "JSON",
-            data: JSON.stringify(questionData),
-            success: function(data) {
-                reportStatus(data)
-                disableFields();
-            },
-            error: function(data) {
-                reportStatus(data)
-            }
+        const submit = document.querySelector(".submit")
+        const confirm = document.querySelector(".confirm");
+        disableFields();
+        submit.classList.remove("hide");
+        confirm.addEventListener('click', async e => {
+            const request = await $.ajax({
+                url: "/questions",
+                type: "POST",
+                contentType: "application/json",
+                dataType: "JSON",
+                data: JSON.stringify(questionData),
+                success: function(data) {
+                    reportStatus(data)
+                    disableFields();
+                },
+                error: function(data) {
+                    reportStatus(data)
+                }
+            })
         })
-
-
-
 
     })
 })

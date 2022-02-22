@@ -44,6 +44,11 @@
         <div class="alert error hide">
             <span class="closebtn">&times;</span>
         </div>
+        <div class="alert submit hide ">
+            <p>Verify that all question detail(s) is/are Correct</p>
+            <span class="confirm">submit</span>
+            <span class="closebtn">cancel</span>
+        </div>
         <div class="input-area">
 
             <form id="form-input" name="form-input" action="./index.js" method="post">
@@ -51,6 +56,55 @@
                     <div class="form-div_left">
                         <label for="textarea-input">Question</label>
                         <textarea id="textarea-input" name="textarea-input" rows="10" cols="50" required placeholder="Enter math notations"></textarea>
+                        <div class="selectors">
+                            <div class="selectors-sections">
+                                <label for="subject">Subject</label>
+                                <div class="select">
+                                    <select name="subject" id="subject">
+                                        <option  value="---">---</option>
+                                        <option value="Biology">Biology</option>
+                                        <option value="English">English</option>
+                                        <option value="Chemistry">Chemistry</option>
+                                        <option value="Mathmatics">Mathmatics</option>
+                                        <option value="Physics">Physics</option>
+                                    </select>
+                                    <span class="focus"></span>
+                                </div>
+                            </div>
+                            <div class="selectors-sections ">
+                                <label for="exam-year">Exam Year</label>
+                                <div class="select">
+                                    <select name="exam-year" id="exam-year">
+                                        <option  value="---">---</option>
+                                        <option value="1985">1985</option>
+                                        <option value="1986">1986</option>
+                                        <option value="1987">1987</option>
+                                        <option value="1988">1988</option>
+                                        <option value="1989">1989</option>
+                                        <option value="1990">1990</option>
+                                       
+                                    </select>
+                                    <span class="focus"></span>
+                                </div>
+
+
+                            </div>
+                            <div class="selectors-sections">
+                                <label for="exam-type">Exam Type</label>
+                                <div class="select">
+                                    <select name="exam-type" id="exam-type">
+                                        <option  value="---">---</option>
+                                        <option value="WAEC">WAEC</option>
+                                        <option value="JAMB">JAMB</option>
+                                        <option value="NECO">NECO</option>
+                                        <option value="NABTEB">NABTEB</option>
+                                    </select>
+                                    <span class="focus"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
                     <div class="form-div_right">
@@ -99,6 +153,18 @@
             </div>
             <div class="final-preview">
                 <p>Final preview</p>
+                <div class="eyear hidden out">
+                    <span></span>
+                    <p></p>
+                </div>
+                <div class="etype hidden out">
+                    <span></span>
+                    <p></p>
+                </div>
+                <div class="esub hidden out">
+                    <span></span>
+                    <p></p>
+                </div>
                 <div class="q hidden out">
                     <span></span>
                     <p></p>
