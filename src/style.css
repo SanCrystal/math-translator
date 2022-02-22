@@ -9,7 +9,10 @@ html {
 }
 
 body {
-    background-image: linear-gradient(45deg, rgb(247, 160, 114), #D9E5D6, #EDDEA4);
+    background-image: url("http://app.melearna.com/img/logo.png");
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .header {
@@ -83,7 +86,7 @@ textarea {
     padding: 2rem 3.5rem;
     justify-items: center;
     align-items: center;
-    /* background-color: grey; */
+    background-image: linear-gradient(to bottom right, rgba(167, 1, 242, 0.3), rgba(43, 168, 250, 0.3));
 }
 
 .input-area,
@@ -99,7 +102,7 @@ textarea {
 .display-field,
 .final-preview {
     display: flex;
-    background-color: #FF9B42;
+    background-color: rgba(53, 61, 232, 0.7);
     height: inherit;
     width: inherit;
     line-height: 5;
@@ -107,6 +110,7 @@ textarea {
     justify-content: center;
     align-content: center;
     margin: 1rem 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.7);
 }
 
 .final-preview {
@@ -145,12 +149,19 @@ form {
 }
 
 .alert {
+    position: absolute;
+    top: 50%;
+    transform: translate(50%, -50%);
     padding: 20px;
     background-color: #f44336;
     color: white;
     opacity: 1;
     transition: opacity 0.6s;
     margin-bottom: 15px;
+}
+
+.alert.success {
+    background-color: #04AA6D;
 }
 
 .closebtn {
