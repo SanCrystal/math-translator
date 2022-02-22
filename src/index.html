@@ -31,33 +31,42 @@
 <body>
 
     <div class="container">
+        <div class="logo">
+            <img src="http://app.melearna.com/img/logo.png" alt="melearna">
+        </div>
         <div class="header">Math Translator For Melearna</div>
         <div class="alert hide">
             <span class="closebtn">&times;</span>
         </div>
+        <div class="alert success hide">
+            <span class="closebtn">&times;</span>
+        </div>
+        <div class="alert error hide">
+            <span class="closebtn">&times;</span>
+        </div>
         <div class="input-area">
 
-            <form id="form-input" action="./index.js" method="post">
+            <form id="form-input" name="form-input" action="./index.js" method="post">
                 <div class="form">
                     <div class="form-div_left">
                         <label for="textarea-input">Question</label>
-                        <textarea id="textarea-input" rows="10" cols="50" required placeholder="Enter math notations"></textarea>
+                        <textarea id="textarea-input" name="textarea-input" rows="10" cols="50" required placeholder="Enter math notations"></textarea>
 
                     </div>
                     <div class="form-div_right">
                         <div class="options">
                             <div class="sep-inputs">
-                                <label for="option-a">Option A.</label>
-                                <input id="option-a" type="text" required class="option">
+                                <label for="option-a">Option A</label>
+                                <input id="option-a" type="text" name="option-a" required class="option">
                                 <label for="option-b">Option B</label>
-                                <input id="option-b" type="text" required class="option">
+                                <input id="option-b" name="option-b" type="text" required class="option">
                             </div>
 
                             <div class="sep-inputs">
                                 <label for="option-c">Option C</label>
-                                <input id="option-c" type="text" required class="option">
+                                <input id="option-c" name="option-c" type="text" required class="option">
                                 <label for="option-d">Option D</label>
-                                <input id="option-d" type="text" required class="option">
+                                <input id="option-d" name="option-d" type="text" required class="option">
 
                             </div>
 
@@ -65,11 +74,11 @@
                         <div class="answers ans-sep">
                             <div class="sep-inputs ">
                                 <label for="answer">Correct Answer</label>
-                                <input id="answer" type="text" required class="option">
+                                <input id="answer" name="answer" type="text" required class="option">
                             </div>
                             <div class="sep-inputs">
                                 <label for="further-explanation">Further Explanation</label>
-                                <textarea rows="5" cols="28" id="further-explanation" placeholder="No official explanation is available for this question at this time." class="option"></textarea>
+                                <textarea rows="5" cols="28" name="further-explanation" id="further-explanation" placeholder="No official explanation is available for this question at this time." class="option"></textarea>
                             </div>
                         </div>
 
@@ -122,6 +131,7 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js " integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=" anonymous "></script>
     <script type="text/javascript " src="./index.js "></script>
 </body>
 
